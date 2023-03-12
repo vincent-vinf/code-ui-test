@@ -6,20 +6,17 @@
           <strong>Vue Popovers</strong> <small>Basic example</small>
         </CCardHeader>
         <CCardBody>
-          <DocsExample href="components/popover.html#example">
-            <CButton
-              v-c-popover="{
-                header: 'Popover title',
-                content:
-                  'And here\’s some amazing content. It’s very engaging. Right?',
-                placement: 'right',
-              }"
-              color="danger"
-              size="lg"
-            >
-              Click to toggle popover
-            </CButton>
-          </DocsExample>
+          <CButton
+            v-c-popover="{
+              header: 'Popover title',
+              content: 'And hsome amazing content. It’s very engaging. Right?',
+              placement: 'right',
+            }"
+            color="danger"
+            size="lg"
+          >
+            Click to toggle popover
+          </CButton>
         </CCardBody>
       </CCard>
     </CCol>
@@ -41,8 +38,8 @@
                 placement: 'top',
               }"
               color="secondary"
-              >Popover on top</CButton
-            >
+              >Popover on top
+            </CButton>
             <CButton
               v-c-popover="{
                 content:
@@ -50,8 +47,8 @@
                 placement: 'right',
               }"
               color="secondary"
-              >Popover on right</CButton
-            >
+              >Popover on right
+            </CButton>
             <CButton
               v-c-popover="{
                 content:
@@ -59,8 +56,8 @@
                 placement: 'bottom',
               }"
               color="secondary"
-              >Popover on bottom</CButton
-            >
+              >Popover on bottom
+            </CButton>
             <CButton
               v-c-popover="{
                 content:
@@ -68,8 +65,8 @@
                 placement: 'left',
               }"
               color="secondary"
-              >Popover on left</CButton
-            >
+              >Popover on left
+            </CButton>
           </DocsExample>
         </CCardBody>
       </CCard>

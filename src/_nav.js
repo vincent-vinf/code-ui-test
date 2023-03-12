@@ -7,18 +7,18 @@ export default [
   },
   {
     component: 'CNavTitle',
-    name: '验证项',
+    name: '验证',
   },
   {
     component: 'CNavItem',
     name: '查看',
-    to: '/theme/colors',
+    to: '/batch/list',
     icon: 'cil-drop',
   },
   {
     component: 'CNavItem',
     name: '添加',
-    to: '/theme/typography',
+    to: '/batch/add',
     icon: 'cil-pencil',
   },
   {
