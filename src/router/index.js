@@ -19,14 +19,14 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
       },
+      // {
+      //   path: '/batch',
+      //   name: 'Batch',
+      //   redirect: '/theme/typography',
+      // },
       {
         path: '/batch',
         name: 'Batch',
-        redirect: '/theme/typography',
-      },
-      {
-        path: '/batch/list',
-        name: 'List',
         component: () => import('@/views/batch/List.vue'),
       },
       {

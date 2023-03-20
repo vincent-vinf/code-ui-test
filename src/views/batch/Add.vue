@@ -4,6 +4,22 @@
       <h4>创建验证</h4>
     </CCardHeader>
     <CCardBody>
+      <CRow>
+        <CCol sm="auto">
+          <CFormLabel for="caseFile" class="col-form-label"
+            >验证名称：
+          </CFormLabel>
+        </CCol>
+
+        <CCol sm="auto">
+          <CFormInput
+            placeholder="Name"
+            v-model="batchName"
+            aria-label="Name"
+          />
+        </CCol>
+      </CRow>
+
       <CFormLabel for="runtime" class="col-form-label">运行时：</CFormLabel>
       <CFormSelect
         id="runtime"
@@ -32,7 +48,7 @@
           </CCardGroup>
           <div style="padding-top: 15px"></div>
           <CFormLabel for="caseFile" class="col-form-label"
-            >测试样例文件：
+            >测试样例数量：
             <CBadge color="primary">{{ code.code.cases.length }}</CBadge>
           </CFormLabel>
           <div style="padding-top: 12px"></div>
@@ -48,7 +64,7 @@
             </CCol>
             <CCol sm="auto">
               <CButton color="primary" @click="uploadCaseFile"
-                >上传文件
+                >上传测试样例
               </CButton>
             </CCol>
           </CRow>
@@ -127,7 +143,7 @@
         </CCardBody>
       </CCard>
       <div class="d-grid col-3 mx-auto">
-        <button type="button" class="btn btn-primary" @click="addBatch()">
+        <button type="button" class="btn btn-primary" @click="createBatch()">
           创建
         </button>
       </div>
@@ -151,6 +167,7 @@ export default {
           files: [],
         },
         cases: [],
+        files: [],
         verify: 'code-match match ./output ./answer',
       },
     })
@@ -165,6 +182,7 @@ export default {
         { label: 'Javascript' },
         { label: 'Golang' },
       ],
+      batchName: '',
       caseInput: '',
       caseOutput: '',
       caseName: '',
@@ -172,16 +190,56 @@ export default {
     }
   },
   methods: {
-    addBatch() {
-      // this.axios.get('http://localhost:8001/batch/1').then((response) => {
-      //   console.log(response.data)
-      // })
-      console.log(this.code.runtime)
+    createBatch() {
+      if (this.batchName === '') {
+        alert('Name is required!')
+        return
+      }
+      let req = {
+        name: this.batchName,
+        verifications: [],
+      }
+
+      if (this.code.code.cases.length !== 0) {
+        req.verifications.push(this.code)
+      }
+
+      for (let index = 0; index < this.customs.length; index++) {
+        this.customs[index].runtime = this.code.runtime
+        this.customs[index].custom.name = this.customs[index].name
+        req.verifications.push(this.customs[index])
+      }
+
+      console.log(req)
+      if (req.verifications.length === 0) {
+        alert(
+          'The basic verification item does not specify a case and no custom verification item is created',
+        )
+      }
+      this.axios
+        .post('http://localhost:8001/batch', req)
+        .then((response) => {
+          console.log(response.data)
+          this.$router.replace({
+            path: '/batch/',
+            query: { id: response.data.data.batchID },
+          })
+        })
+        .catch((error) => {
+          alert('Creation failed, please try again!')
+          console.log(error)
+        })
     },
     addCustom() {
       if (this.addCustomName === '') {
         alert('Please specify a name first!')
         return
+      }
+      for (const elem of this.customs) {
+        if (elem.name === this.addCustomName) {
+          alert('Verification item names cannot be repeated!')
+          return
+        }
       }
       this.customs.push({
         name: this.addCustomName,
@@ -224,7 +282,7 @@ export default {
           this.addCasesToArray(res.data.data.cases)
         })
         .catch((error) => {
-          alert('Upload failed, please try again!')
+          alert('Upload case failed, please try again!')
           console.log(error)
         })
     },
@@ -251,7 +309,7 @@ export default {
           this.addCasesToArray(res.data.data.cases)
         })
         .catch((error) => {
-          alert('Upload failed, please try again!')
+          alert('Upload case file failed, please try again!')
           console.log(error)
         })
     },

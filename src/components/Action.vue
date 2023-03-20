@@ -151,7 +151,7 @@ export default {
           this.filesValue.push({
             path: this.path,
             name: f.name,
-            ossPath: res.data,
+            ossPath: res.data.data,
           })
           this.closeSelector()
         })

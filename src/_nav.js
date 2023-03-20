@@ -12,7 +12,7 @@ export default [
   {
     component: 'CNavItem',
     name: '查看',
-    to: '/batch/list',
+    to: '/batch',
     icon: 'cil-drop',
   },
   {
