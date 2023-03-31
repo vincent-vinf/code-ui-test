@@ -215,14 +215,15 @@ export default {
         alert(
           'The basic verification item does not specify a case and no custom verification item is created',
         )
+        return
       }
       this.axios
         .post('http://localhost:8001/batch', req)
         .then((response) => {
           console.log(response.data)
           this.$router.replace({
-            path: '/batch/',
-            query: { id: response.data.data.batchID },
+            path: '/batch',
+            query: { id: response.data.data.id },
           })
         })
         .catch((error) => {

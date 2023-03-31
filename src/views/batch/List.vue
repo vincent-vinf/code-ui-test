@@ -9,10 +9,12 @@ export default {
     return {}
   },
   mounted() {
-    console.log(this.$route.query.batchID !== undefined)
-    console.log(this.$route.query.batchID)
+    let id = ''
+    if (this.$route.query.batchID !== undefined) {
+      id = '/' + this.$route.query.id
+    }
     this.axios
-      .get('http://localhost:8001/batch/' + this.$route.query.batchID)
+      .get('http://localhost:8001/batch' + id)
       .then((response) => {
         console.log(response.data)
       })
