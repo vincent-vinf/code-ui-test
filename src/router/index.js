@@ -27,6 +27,11 @@ const routes = [
       {
         path: '/batch',
         name: 'Batch',
+        component: () => import('@/views/batch/Detail.vue'),
+      },
+      {
+        path: '/batch/list',
+        name: 'List',
         component: () => import('@/views/batch/List.vue'),
       },
       {
@@ -38,65 +43,6 @@ const routes = [
         path: '/charts',
         name: 'Charts',
         component: () => import('@/views/charts/Charts.vue'),
-      },
-      {
-        path: '/icons',
-        name: 'Icons',
-        component: {
-          render() {
-            return h(resolveComponent('router-view'))
-          },
-        },
-        redirect: '/icons/coreui-icons',
-        children: [
-          {
-            path: '/icons/coreui-icons',
-            name: 'CoreUI Icons',
-            component: () => import('@/views/icons/CoreUIIcons.vue'),
-          },
-          {
-            path: '/icons/brands',
-            name: 'Brands',
-            component: () => import('@/views/icons/Brands.vue'),
-          },
-          {
-            path: '/icons/flags',
-            name: 'Flags',
-            component: () => import('@/views/icons/Flags.vue'),
-          },
-        ],
-      },
-      {
-        path: '/notifications',
-        name: 'Notifications',
-        component: {
-          render() {
-            return h(resolveComponent('router-view'))
-          },
-        },
-        redirect: '/notifications/alerts',
-        children: [
-          {
-            path: '/notifications/alerts',
-            name: 'Alerts',
-            component: () => import('@/views/notifications/Alerts.vue'),
-          },
-          {
-            path: '/notifications/badges',
-            name: 'Badges',
-            component: () => import('@/views/notifications/Badges.vue'),
-          },
-          {
-            path: '/notifications/modals',
-            name: 'Modals',
-            component: () => import('@/views/notifications/Modals.vue'),
-          },
-        ],
-      },
-      {
-        path: '/widgets',
-        name: 'Widgets',
-        component: () => import('@/views/widgets/Widgets.vue'),
       },
     ],
   },

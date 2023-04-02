@@ -10,7 +10,6 @@
             >验证名称：
           </CFormLabel>
         </CCol>
-
         <CCol sm="auto">
           <CFormInput
             placeholder="Name"
@@ -19,7 +18,19 @@
           />
         </CCol>
       </CRow>
-
+      <div style="padding-top: 10px"></div>
+      <CRow>
+        <CCol sm="auto">
+          <CFormLabel for="caseFile" class="col-form-label">描述：</CFormLabel>
+        </CCol>
+        <CCol>
+          <CFormTextarea
+            placeholder="Describe"
+            v-model="batchDescribe"
+            aria-label="Describe"
+          />
+        </CCol>
+      </CRow>
       <CFormLabel for="runtime" class="col-form-label">运行时：</CFormLabel>
       <CFormSelect
         id="runtime"
@@ -183,6 +194,7 @@ export default {
         { label: 'Golang' },
       ],
       batchName: '',
+      batchDescribe: '',
       caseInput: '',
       caseOutput: '',
       caseName: '',
@@ -197,7 +209,9 @@ export default {
       }
       let req = {
         name: this.batchName,
+        describe: this.batchDescribe,
         verifications: [],
+        runtime: this.code.runtime,
       }
 
       if (this.code.code.cases.length !== 0) {

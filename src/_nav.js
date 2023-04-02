@@ -11,8 +11,8 @@ export default [
   },
   {
     component: 'CNavItem',
-    name: '查看',
-    to: '/batch',
+    name: '列表',
+    to: '/batch/list',
     icon: 'cil-drop',
   },
   {
@@ -27,14 +27,8 @@ export default [
   },
   {
     component: 'CNavItem',
-    name: '查看',
-    to: '/theme/colors',
+    name: '我的任务',
+    to: '/batch/add',
     icon: 'cil-drop',
-  },
-  {
-    component: 'CNavItem',
-    name: '添加',
-    to: '/theme/typography',
-    icon: 'cil-pencil',
   },
 ]
