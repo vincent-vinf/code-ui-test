@@ -38,8 +38,8 @@
         >运行时：{{ runtime }}
       </CFormLabel>
       <div style="padding-top: 10px"></div>
-      <CCard class="mb-3">
-        <CCardHeader v-if="code">
+      <CCard class="mb-3" v-if="code !== undefined">
+        <CCardHeader>
           <strong>基础验证项</strong>
         </CCardHeader>
         <CCardBody>
@@ -86,17 +86,30 @@
         </CCardBody>
       </CCard>
       <div class="d-grid col-3 mx-auto">
-        <button type="button" class="btn btn-primary">创建验证任务</button>
+        <button type="button" class="btn btn-primary" @click="openSelector">
+          创建验证任务
+        </button>
       </div>
     </CCardBody>
   </CCard>
+  <CModal :visible="createVisible" @close="closeSelector">
+    <CModalHeader>
+      <CModalTitle>创建验证任务</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <VCode :language="runtime" v-model:code="codeValue"></VCode>
+    </CModalBody>
+    <CModalFooter>
+      <CButton color="primary" @click="create">确认</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
 
 <script>
 import { ref } from 'vue'
 
 export default {
-  name: 'ListBatch',
+  name: 'Detail',
   setup() {
     const code = ref({
       init: {
@@ -112,6 +125,8 @@ export default {
     const batchName = ref('')
     const batchDescribe = ref('')
     const runtime = ref('')
+    const createVisible = ref(false)
+    const codeValue = ref('')
 
     return {
       code,
@@ -119,6 +134,8 @@ export default {
       batchName,
       batchDescribe,
       runtime,
+      createVisible,
+      codeValue,
     }
   },
   mounted() {
@@ -131,11 +148,12 @@ export default {
     this.axios
       .get('http://localhost:8001/batch/' + this.$route.query.id)
       .then((response) => {
-        console.log(response.data.data)
+        console.log('batch:', response.data.data)
+        this.batchID = response.data.data.id
         this.batchName = response.data.data.name
         this.batchDescribe = response.data.data.describe
         this.runtime = response.data.data.runtime
-        let c = null
+        let c = undefined
         for (const elem of response.data.data.verifications) {
           let v = JSON.parse(elem.Data)
           if (v.code !== undefined) {
@@ -145,14 +163,44 @@ export default {
           }
         }
         this.code = c
-        console.log(this.code)
-        console.log(this.customs)
       })
       .catch((error) => {
-        alert('Crexxx, please try again!')
+        alert('get batch, please try again!')
         console.log(error)
       })
   },
-  methods: {},
+  methods: {
+    openSelector() {
+      this.createVisible = true
+    },
+    closeSelector() {
+      this.createVisible = false
+      this.codeValue = ''
+    },
+    create() {
+      if (this.codeValue === '') {
+        alert('empty!')
+        return
+      }
+      let req = {
+        batchID: this.batchID,
+        code: this.codeValue,
+      }
+      console.log(req)
+      this.axios
+        .post('http://localhost:8001/batch/task', req)
+        .then((response) => {
+          console.log('task:', response.data.data)
+          this.$router.push({
+            path: '/task',
+            query: { id: response.data.data.id },
+          })
+        })
+        .catch((error) => {
+          alert('Crexx try again!')
+          console.log(error)
+        })
+    },
+  },
 }
 </script>

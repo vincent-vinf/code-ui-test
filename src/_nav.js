@@ -28,7 +28,7 @@ export default [
   {
     component: 'CNavItem',
     name: '我的任务',
-    to: '/batch/add',
+    to: '/task/list',
     icon: 'cil-drop',
   },
 ]

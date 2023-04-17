@@ -19,11 +19,6 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
       },
-      // {
-      //   path: '/batch',
-      //   name: 'Batch',
-      //   redirect: '/theme/typography',
-      // },
       {
         path: '/batch',
         name: 'Batch',
@@ -31,13 +26,23 @@ const routes = [
       },
       {
         path: '/batch/list',
-        name: 'List',
+        name: 'ListBatck',
         component: () => import('@/views/batch/List.vue'),
       },
       {
         path: '/batch/add',
         name: 'Add',
         component: () => import('@/views/batch/Add.vue'),
+      },
+      {
+        path: '/task/list',
+        name: 'ListTask',
+        component: () => import('@/views/task/List.vue'),
+      },
+      {
+        path: '/task',
+        name: 'Task',
+        component: () => import('@/views/task/Detail.vue'),
       },
       {
         path: '/charts',
