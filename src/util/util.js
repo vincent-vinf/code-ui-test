@@ -1,2 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-function login() {}
+const baseURL = 'http://code.vinf.top:30301/'
+export default {
+  baseURL,
+}
