@@ -141,7 +141,7 @@ export default {
       let formData = new FormData()
       formData.append('file', f)
       this.axios
-        .post('http://localhost:8001/batch/file', formData, {
+        .post('http://localhost:8001/api/batch/file', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

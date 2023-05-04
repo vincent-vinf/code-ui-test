@@ -53,7 +53,7 @@ export default {
   },
   mounted() {
     this.axios
-      .get('http://localhost:8003/result')
+      .get('http://localhost:8003/api/result')
       .then((response) => {
         console.log(response.data.data)
         this.batchList = response.data.data

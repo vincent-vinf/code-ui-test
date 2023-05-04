@@ -655,13 +655,11 @@
 import { getStyle } from '@coreui/utils'
 import { CChart } from '@coreui/vue-chartjs'
 import WidgetsStatsA from './WidgetsStatsTypeA.vue'
-import WidgetsStatsD from './WidgetsStatsTypeD.vue'
 export default {
   name: 'Widgets',
   components: {
     CChart,
     WidgetsStatsA,
-    WidgetsStatsD,
   },
   setup() {
     const widgetStatsE = {

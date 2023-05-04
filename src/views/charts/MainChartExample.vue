@@ -1,12 +1,5 @@
 <template>
-  <CChart
-    type="line"
-    :data="data"
-    :options="options"
-    @get-dataset-at-event="aa"
-    @get-element-at-event="aa"
-    @get-elements-at-event="aa"
-  />
+  <CChart type="line" :data="data" :options="options" />
 </template>
 
 <script>
@@ -111,11 +104,6 @@ export default {
       options,
     }
   },
-  methods: {
-    aa(value, value2) {
-      console.log(value)
-      console.log(value2)
-    },
-  },
+  methods: {},
 }
 </script>

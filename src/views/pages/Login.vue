@@ -14,8 +14,9 @@
                       <CIcon icon="cil-user" />
                     </CInputGroupText>
                     <CFormInput
-                      placeholder="Username"
-                      autocomplete="username"
+                      placeholder="Email"
+                      autocomplete="email"
+                      v-model="email"
                     />
                   </CInputGroup>
                   <CInputGroup class="mb-4">
@@ -25,16 +26,14 @@
                     <CFormInput
                       type="password"
                       placeholder="Password"
+                      v-model="password"
                       autocomplete="current-password"
                     />
                   </CInputGroup>
                   <CRow>
                     <CCol :xs="6">
-                      <CButton color="primary" class="px-4"> Login </CButton>
-                    </CCol>
-                    <CCol :xs="6" class="text-right">
-                      <CButton color="link" class="px-0">
-                        Forgot password?
+                      <CButton color="primary" class="px-4" @click="login">
+                        Login
                       </CButton>
                     </CCol>
                   </CRow>
@@ -45,12 +44,13 @@
               <CCardBody class="text-center">
                 <div>
                   <h2>Sign up</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-                  <CButton color="light" variant="outline" class="mt-3">
+                  <p>No account? Welcome to register!</p>
+                  <CButton
+                    color="light"
+                    variant="outline"
+                    class="mt-3"
+                    @click="register"
+                  >
                     Register Now!
                   </CButton>
                 </div>
@@ -66,5 +66,31 @@
 <script>
 export default {
   name: 'Login',
+  setup() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
+  methods: {
+    register() {
+      this.$router.push({
+        path: '/pages/register',
+      })
+    },
+    login() {
+      this.axios
+        .post('http://localhost:8002/api/user/login', {
+          email: this.email,
+          passwd: this.password,
+        })
+        .then((res) => {
+          localStorage.setItem('authToken', res.data.token)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
+  },
 }
 </script>

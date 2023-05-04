@@ -84,7 +84,7 @@ export default {
       return
     }
     this.axios
-      .get('http://localhost:8003/result/' + this.$route.query.id)
+      .get('http://localhost:8003/api/result/' + this.$route.query.id)
       .then((response) => {
         console.log('task:', response.data.data)
         this.subtasks = response.data.data.subTasks

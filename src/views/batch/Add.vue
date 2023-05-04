@@ -232,7 +232,7 @@ export default {
         return
       }
       this.axios
-        .post('http://localhost:8001/batch', req)
+        .post('http://localhost:8001/api/batch', req)
         .then((response) => {
           console.log(response.data)
           this.$router.replace({
@@ -277,7 +277,7 @@ export default {
 
       this.axios
         .post(
-          'http://localhost:8001/batch/case',
+          'http://localhost:8001/api/batch/case',
           [
             {
               name: this.caseName,
@@ -310,7 +310,7 @@ export default {
       let formData = new FormData()
       formData.append('file', f)
       this.axios
-        .post('http://localhost:8001/batch/case/file', formData, {
+        .post('http://localhost:8001/api/batch/case/file', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -328,19 +328,6 @@ export default {
           console.log(error)
         })
     },
-    login() {
-      this.axios
-        .post('http://localhost:8002/user/login', {
-          email: 'g@qq.com',
-          passwd: '123',
-        })
-        .then((res) => {
-          localStorage.setItem('authToken', res.data.token)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    },
     getFile(e) {
       this.caseFile = e.target.files
     },
@@ -355,9 +342,6 @@ export default {
 
       console.log(this.code.code.cases)
     },
-  },
-  mounted() {
-    this.login()
   },
 }
 </script>

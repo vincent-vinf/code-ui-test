@@ -146,7 +146,7 @@ export default {
       return
     }
     this.axios
-      .get('http://localhost:8001/batch/' + this.$route.query.id)
+      .get('http://localhost:8001/api/batch/' + this.$route.query.id)
       .then((response) => {
         console.log('batch:', response.data.data)
         this.batchID = response.data.data.id
@@ -188,7 +188,7 @@ export default {
       }
       console.log(req)
       this.axios
-        .post('http://localhost:8001/batch/task', req)
+        .post('http://localhost:8001/api/batch/task', req)
         .then((response) => {
           console.log('task:', response.data.data)
           this.$router.push({

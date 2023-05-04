@@ -57,7 +57,7 @@ export default {
   },
   mounted() {
     this.axios
-      .get('http://localhost:8001/batch')
+      .get('http://localhost:8001/api/batch')
       .then((response) => {
         console.log(response.data.data)
         this.batchList = response.data.data
