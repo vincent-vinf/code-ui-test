@@ -9,7 +9,7 @@
       </CHeaderBrand>
       <CHeaderNav class="d-none d-md-flex me-auto">
         <CNavItem>
-          <CNavLink href="/dashboard"> Dashboard </CNavLink>
+          <CNavLink href="/batch/list"> 验证列表 </CNavLink>
         </CNavItem>
       </CHeaderNav>
     </CContainer>

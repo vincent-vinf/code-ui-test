@@ -101,7 +101,7 @@ export default {
         .then((res) => {
           localStorage.setItem('authToken', res.data.token)
           this.$router.replace({
-            path: '/dashboard',
+            path: '/batch/list',
           })
         })
         .catch(function (error) {

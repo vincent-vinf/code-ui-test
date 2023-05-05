@@ -1,11 +1,5 @@
 export default [
   {
-    component: 'CNavItem',
-    name: '主页',
-    to: '/dashboard',
-    icon: 'cil-speedometer',
-  },
-  {
     component: 'CNavTitle',
     name: '验证',
   },

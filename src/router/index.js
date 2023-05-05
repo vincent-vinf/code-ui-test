@@ -8,14 +8,8 @@ const routes = [
     path: '/',
     name: 'Home',
     component: DefaultLayout,
-    redirect: '/dashboard',
+    redirect: '/batch/list',
     children: [
-      {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: () =>
-          import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
-      },
       {
         path: '/batch',
         name: 'Batch',
